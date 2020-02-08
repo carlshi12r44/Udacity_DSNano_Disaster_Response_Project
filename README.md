@@ -60,5 +60,5 @@ http://127.0.0.1:3001/
 Udacity provides the skeleton codes
 FigureEight provides the datasets
 # Web Showcase
-![Image of Classification](../Screenshots/Classify_Result.png)
-![Image of Distributions](../Screenshots/distribution.png)
+![Image of Classification](https://github.com/carlshi12r44/Udacity_DSNano_Disaster_Response_Project/blob/master/Screenshots/Classify_Result.PNG?raw=true)
+![Image of Distributions](https://github.com/carlshi12r44/Udacity_DSNano_Disaster_Response_Project/blob/master/Screenshots/distribution.PNG?raw=true)
