@@ -137,7 +137,7 @@ def save_model(model, model_filepath):
     '''
 
     #export the model using pickel
-    pickle.dump(mdoel, open(model_filepath, 'wb'))
+    pickle.dump(model, open(model_filepath, 'wb'))
 
 
 def main():
