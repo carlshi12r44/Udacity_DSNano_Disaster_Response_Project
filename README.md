@@ -20,16 +20,16 @@ The project is divided in three sections:
 # Getting Started
 This project is running on Python 3.x under distribution of Anaconda
 ## Dependencies
-  -NLTK
-  -Scikit-Learn
-  -Numpy
-  -Flask
-  -os
-  -re
-  -pandas
-  -pickle
-  -sqlalchemy
-  -sqlite3
+  - NLTK
+  - Scikit-Learn
+  - Numpy
+  - Flask
+  - os
+  - re
+  - pandas
+  - pickle
+  - sqlalchemy
+  - sqlite3
 ## Installation
 Git this repo by 
 ```
