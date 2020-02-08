@@ -26,11 +26,11 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///../data/YourDatabaseName.db')
-df = pd.read_sql_table('YourTableName', engine)
+engine = create_engine('sqlite:///../data/DisasterResponse.db')
+df = pd.read_sql_table('df', engine)
 
 # load model
-model = joblib.load("../models/your_model_name.pkl")
+model = joblib.load("../models/classifier.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -43,6 +43,17 @@ def index():
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
     
+    related_dict = {0: 'not related', 1: 'related'}
+
+    # extract the 'related' column from the database
+    related = df['related'].map(related_dict)
+    related_counts = related.value_counts()
+    related_names = list(related_counts.index)
+
+    categories = df.iloc[:, 4:]
+    categories_mean = categories.mean().sort_values(ascending=False)[1:11]
+    categories_name = list(categories_mean.index)
+
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
@@ -61,6 +72,41 @@ def index():
                 },
                 'xaxis': {
                     'title': "Genre"
+                }
+            }
+        },
+        {
+            'data': [
+                Bar(
+                    x=related_names,
+                    y=related_counts
+                )
+            ],
+
+            'layout': {
+                'title': 'Distribution of related names vs related counts',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': ""
+                }
+            }
+        },
+        {
+            'data': [
+                Bar(
+                    x=categories_name,
+                    y=categories_mean
+                )
+            ],
+            'layout': {
+                'title': 'Distribution of the categorical names and mean',
+                'yaxis': {
+                    'title': "categorical names"
+                },
+                'xaxis': {
+                    'title': 'categorical means'
                 }
             }
         }
@@ -93,7 +139,7 @@ def go():
 
 
 def main():
-    app.run(host='0.0.0.0', port=3001, debug=True)
+    app.run(host='127.0.0.1', port=3001, debug=True)
 
 
 if __name__ == '__main__':
