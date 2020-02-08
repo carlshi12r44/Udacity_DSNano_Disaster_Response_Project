@@ -1,13 +1,13 @@
 # Disaster Response Classification Project :ocean: :ocean: :ocean:
 # Table of Contents
-1. [Description](#description)
-2. [Getting Started](#getting-started)
+  - [Description](#description)
+  - [Getting Started](#getting-started)
   - [Dependencies](#dependencies)
   - [Installation](#installation)
   - [Execution](#execution)
-3. [License](#license)
-4. [Acknowledgement](#acknowledgement)
-5. [Web Showcase](#web-showcase)
+  - [License](#license)
+  - [Acknowledgement](#acknowledgement)
+  - [Web Showcase](#web-showcase)
 
 # Description
 This project uses natural language processing to determine whether a text is a message for the disaster. This project is a part of the Udacity's nanodegree Data Scientist program. The initial dataset contains the pre-labelled tweets and messages from real-life disaster, provided by the FigureEight.
