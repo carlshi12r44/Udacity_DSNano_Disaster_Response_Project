@@ -1,11 +1,11 @@
-# Disaster Response Classification Project
+# Disaster Response Classification Project :ocean: :ocean: :ocean:
 # Table of Contents
 1. [Description](#description)
 2. [Getting Started](#getting-started)
-  i. [Dependencies](#dependencies)
-  ii. [Installation](#installation)
-  iii. [Execution](#execution)
-3. [License]
+  - [Dependencies](#dependencies)
+  - [Installation](#installation)
+  - [Execution](#execution)
+3. [License](#license)
 4. [Acknowledgement](#acknowledgement)
 5. [Web Showcase](#web-showcase)
 
@@ -55,5 +55,10 @@ http://127.0.0.1:3001/
 ```
 
 # License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # Acknowledgement
+Udacity provides the skeleton codes
+FigureEight provides the datasets
 # Web Showcase
+![Image of Classification](../Screenshots/Classify_Result.png)
+![Image of Distributions](../Screenshots/distribution.png)
