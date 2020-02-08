@@ -10,7 +10,7 @@ import pickle
 from sqlalchemy import create_engine
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
-from sklearn.metrics import f1_score, precision_score, recall_score
+from sklearn.metrics import f1_score, precision_score, recall_score, classification_report
 from sklearn.model_selection import GridSearchCV
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.ensemble import AdaBoostClassifier
@@ -35,6 +35,7 @@ def load_data(database_filepath):
     '''
 
     # load data from the database
+
     engine = create_engine('sqlite:///{}'.format(database_filepath))
 
     # connect to the databse
@@ -44,7 +45,7 @@ def load_data(database_filepath):
     df = pd.read_sql('SELECT * FROM df', conn)
 
     # extract values from X and y
-    X =  df['messages']
+    X =  df['message']
     Y = df.iloc[:, 4:]
 
     category_names = list(Y)
@@ -64,9 +65,7 @@ def tokenize(text):
     # normalize the text
     text = re.sub(r'[^a-zA-Z0-9]',' ', text.lower())
 
-    words = word_tokenize(text)
-
-    tokens = [w for w in words if w not in stopwords.words("english")]
+    tokens = word_tokenize(text)
 
     # stemming and lemming
     lemmatizer = WordNetLemmatizer()
@@ -99,11 +98,11 @@ def build_model():
     # use grid search to find better parameters
     parameters = {
         'text_pipeline__tfidf__use_idf': (True, False),
-        'clf__estimator__n_estimators': [10, 50, 100],
-        'clf__estimator__learning_rate': [0.1, 1, 5],
+        'clf__estimator__n_estimators': [10, 50],
+        'clf__estimator__learning_rate': [0.1, 1],
     }
 
-    cv = GridSearchCV(pipeline, param_grid=parameters)
+    cv = GridSearchCV(pipeline, param_grid=parameters, n_jobs=-1)
 
     return cv
 
@@ -125,14 +124,8 @@ def evaluate_model(model, X_test, Y_test, category_names):
     # predict on test data
     y_pred = model.predict(X_test)
 
-    # report the f1 score, and recall for every category
-    for i in range(36):
-        category = category_names[i]
-        f1 = f1_score(Y_test.iloc[:, i], y_pred.iloc[:, i])
-        precision = precision_score(Y_test.iloc[:, i], y_pred[:, i])
-        recall = recall_score(Y_test.iloc[:, i], y_pred[:, i])
-        print(category)
-        print('\tF1_score: %.4f\tPrecision: %.4f\t Recall: %.4f\n' % (f1, precision, recall))
+    for i in range(35):
+        print(category_names[i], '\n', classification_report(Y_test.iloc[:,i], y_pred[:, i]))
 
 
 
